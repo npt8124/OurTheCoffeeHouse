@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import Layout from "../components/Layout";
 
@@ -116,66 +117,58 @@ const Stores = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative h-[397px] overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="position-relative overflow-hidden" style={{height:397}}>
+        <div className="position-absolute top-0 start-0 w-100 h-100" style={{opacity:1}}>
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/9c01e866677125fc95dd6f924e3ee81f46fc2062?width=2892"
             alt="Coffee shop interior"
-            className="w-full h-full object-cover"
+            className="w-100 h-100 object-fit-cover"
           />
-          <div className="absolute inset-0 bg-black/65 opacity-60"></div>
+          <div className="position-absolute top-0 start-0 w-100 h-100" style={{background:'rgba(0,0,0,0.65)'}}></div>
         </div>
-
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-bold leading-tight mb-4">
-            Hệ Thống Cửa Hàng
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-normal leading-relaxed max-w-[679px]">
+        <div className="position-relative d-flex flex-column justify-content-center align-items-center text-center text-white px-3" style={{zIndex: 3, height: 397}}>
+          <h1 className="fw-bold mb-3 pt-5" style={{fontSize: 48, lineHeight: 1.1}}>Cửa hàng</h1>
+          <p className="mb-4 mx-auto" style={{fontSize: 22, maxWidth: 700}}>
             Tìm cửa hàng The Coffee House gần bạn nhất
           </p>
         </div>
       </section>
 
       {/* Store Stats */}
-      <section className="py-16 px-4 bg-[#FFC107]">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <p className="text-[48px] font-bold text-black">100+</p>
-              <p className="text-[20px] font-medium text-black">Cửa hàng</p>
+      <section className="py-5 px-4" style={{background:'#FFC107'}}>
+        <div className="container">
+          <div className="row text-center gy-4">
+            <div className="col-6 col-md-3">
+              <p className="display-4 fw-bold text-black mb-1">100+</p>
+              <p className="fs-5 fw-medium text-black">Cửa hàng</p>
             </div>
-            <div>
-              <p className="text-[48px] font-bold text-black">63</p>
-              <p className="text-[20px] font-medium text-black">Tỉnh thành</p>
+            <div className="col-6 col-md-3">
+              <p className="display-4 fw-bold text-black mb-1">63</p>
+              <p className="fs-5 fw-medium text-black">Tỉnh thành</p>
             </div>
-            <div>
-              <p className="text-[48px] font-bold text-black">1M+</p>
-              <p className="text-[20px] font-medium text-black">Khách hàng</p>
+            <div className="col-6 col-md-3">
+              <p className="display-4 fw-bold text-black mb-1">1M+</p>
+              <p className="fs-5 fw-medium text-black">Khách hàng</p>
             </div>
-            <div>
-              <p className="text-[48px] font-bold text-black">06:00-22:00</p>
-              <p className="text-[20px] font-medium text-black">Giờ phục vụ</p>
+            <div className="col-6 col-md-3">
+              <p className="display-4 fw-bold text-black mb-1">06:00-22:00</p>
+              <p className="fs-5 fw-medium text-black">Giờ phục vụ</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* City Filter */}
-      <section className="py-8 px-4 bg-gray-50">
-        <div className="max-w-[1440px] mx-auto">
-          <h2 className="text-[24px] font-bold text-black text-center mb-6">
-            Chọn thành phố:
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
+      <section className="py-4 px-4 bg-light">
+        <div className="container">
+          <h2 className="fs-3 fw-bold text-dark text-center mb-4">Chọn thành phố:</h2>
+          <div className="d-flex flex-wrap justify-content-center gap-2">
             {cities.map((city) => (
               <button
                 key={city}
                 onClick={() => setSelectedCity(city)}
-                className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                  selectedCity === city
-                    ? "bg-[#FFC107] text-black"
-                    : "bg-white text-black border-2 border-gray-200 hover:border-[#FFC107]"
-                }`}
+                className={`btn px-4 py-2 rounded-pill fw-medium ${selectedCity === city ? 'btn-warning text-black' : 'btn-outline-secondary text-black'}`}
+                style={selectedCity === city ? {background:'#FFC107', border:'none'} : {}}
               >
                 {city}
               </button>
@@ -185,72 +178,57 @@ const Stores = () => {
       </section>
 
       {/* Store Listings */}
-      <section className="py-16 px-4">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-[32px] font-bold text-black">
-              Danh Sách Cửa Hàng{" "}
-              {selectedCity !== "Tất cả" && `tại ${selectedCity}`}
+      <section className="py-5 px-4">
+        <div className="container">
+          <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+            <h2 className="fs-1 fw-bold text-dark mb-0">
+              Danh Sách Cửa Hàng {selectedCity !== "Tất cả" && `tại ${selectedCity}`}
             </h2>
-            <p className="text-gray-600">
-              Tìm thấy {filteredStores.length} cửa hàng
-            </p>
+            <p className="text-secondary mb-0">Tìm thấy {filteredStores.length} cửa hàng</p>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="row gy-4">
             {filteredStores.map((store) => (
-              <div
-                key={store.id}
-                className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                  <div className="aspect-[4/3] md:aspect-auto">
-                    <img
-                      src={store.image}
-                      alt={store.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-[24px] font-bold text-black mb-3">
-                        {store.name}
-                      </h3>
-                      <div className="space-y-2 mb-4">
-                        <p className="flex items-start text-gray-700">
-                          <span className="text-[#FFC107] mr-2">📍</span>
-                          {store.address}
-                        </p>
-                        <p className="flex items-center text-gray-700">
-                          <span className="text-[#FFC107] mr-2">📞</span>
-                          {store.phone}
-                        </p>
-                        <p className="flex items-center text-gray-700">
-                          <span className="text-[#FFC107] mr-2">🕒</span>
-                          {store.hours}
-                        </p>
-                      </div>
+              <div key={store.id} className="col-12 col-lg-6">
+                <div className="card shadow border-0 h-100">
+                  <div className="row g-0 h-100">
+                    <div className="col-12 col-md-5">
+                      <img
+                        src={store.image}
+                        alt={store.name}
+                        className="w-100 h-100 object-fit-cover rounded-start"
+                        style={{objectFit:'cover', minHeight:200}}
+                      />
                     </div>
-
-                    <div>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {store.features.map((feature, index) => (
-                          <span
-                            key={index}
-                            className="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full"
-                          >
-                            {feature}
-                          </span>
-                        ))}
+                    <div className="col-12 col-md-7 p-4 d-flex flex-column justify-content-between">
+                      <div>
+                        <h3 className="fs-3 fw-bold text-dark mb-2">{store.name}</h3>
+                        <div className="mb-3">
+                          <p className="d-flex align-items-start text-secondary mb-1">
+                            <span className="me-2" style={{color:'#FFC107'}}>📍</span>
+                            {store.address}
+                          </p>
+                          <p className="d-flex align-items-center text-secondary mb-1">
+                            <span className="me-2" style={{color:'#FFC107'}}>📞</span>
+                            {store.phone}
+                          </p>
+                          <p className="d-flex align-items-center text-secondary mb-1">
+                            <span className="me-2" style={{color:'#FFC107'}}>🕒</span>
+                            {store.hours}
+                          </p>
+                        </div>
                       </div>
-
-                      <div className="flex space-x-3">
-                        <button className="flex-1 bg-[#FFC107] text-black py-2 px-4 rounded-lg font-medium hover:bg-[#FFB300] transition-colors">
-                          Chỉ đường
-                        </button>
-                        <button className="flex-1 bg-[#212529] text-white py-2 px-4 rounded-lg font-medium hover:bg-[#343a40] transition-colors">
-                          Gọi điện
-                        </button>
+                      <div>
+                        <div className="d-flex flex-wrap gap-2 mb-3">
+                          {store.features.map((feature, index) => (
+                            <span key={index} className="badge bg-light text-secondary border border-1 px-3 py-2 rounded-pill">
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="d-flex gap-2">
+                          <button className="btn btn-warning flex-fill text-black fw-medium" style={{background:'#FFC107', border:'none'}}>Chỉ đường</button>
+                          <button className="btn btn-dark flex-fill fw-medium">Gọi điện</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -262,22 +240,19 @@ const Stores = () => {
       </section>
 
       {/* Store Locator CTA */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-[1440px] mx-auto text-center">
-          <h2 className="text-[32px] font-bold text-black mb-6">
-            Không tìm thấy cửa hàng gần bạn?
-          </h2>
-          <p className="text-[20px] text-gray-700 mb-8 max-w-[600px] mx-auto">
-            Chúng tôi đang mở rộng hệ thống cửa hàng. Hãy để lại thông tin để
-            được thông báo khi có cửa hàng mới gần bạn.
+      <section className="py-5 px-4 bg-light">
+        <div className="container text-center">
+          <h2 className="fs-1 fw-bold text-dark mb-4">Không tìm thấy cửa hàng gần bạn?</h2>
+          <p className="fs-4 text-secondary mb-4 mx-auto" style={{maxWidth:600}}>
+            Chúng tôi đang mở rộng hệ thống cửa hàng. Hãy để lại thông tin để được thông báo khi có cửa hàng mới gần bạn.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-[500px] mx-auto">
+          <div className="d-flex flex-column flex-sm-row gap-2 mx-auto" style={{maxWidth:500}}>
             <input
               type="text"
               placeholder="Nhập khu vực bạn mong muốn"
-              className="flex-1 px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-[#FFC107]"
+              className="form-control flex-fill px-4 py-3 rounded-pill border-2 border-secondary"
             />
-            <button className="bg-[#FFC107] text-black px-8 py-3 rounded-lg font-bold hover:bg-[#FFB300] transition-colors">
+            <button className="btn btn-warning fw-bold px-4 py-3 text-black flex-shrink-0" style={{background:'#FFC107', border:'none'}}>
               Gửi yêu cầu
             </button>
           </div>
